@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Bible Search</title>
+    </head>
+    <body>
+    <h1>Bible Search</h1>
+
+    <form th:action="@{/}" method="get">
+        <input type="text" name="keyword" placeholder="검색어를 입력하세요"
+           th:value="${keyword}"/>
+    <button type="submit">검색</button>
+</form>
+<hr/>
+
+<table border="1" th:if="${results} != null">
+    <thead>
+    <tr>
+        <th>말씀</th>
+        <th>본문</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bible : ${results}">
+        <!-- 책이름(longLabel) + 장(chapter) + 절(paragraph) -->
+        <td th:text="${bible.longLabel} + ' '
+                    + ${bible.chapter} + '장 '
+                    + ${bible.paragraph} + '절'">
+            위치
+        </td>
+        <!-- 해당 구절 내용(sentence) -->
+        <td th:text="${bible.sentence}">구절</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- 페이징 -->
+<div th:if="${totalPages} > 1">
+    <ul style="list-style: none;">
+        <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+            style="display:inline; margin-right: 5px;">
+            <!-- i == currentPage 인 경우 배경색 회색, 그 외 흰색 -->
+            <th:block th:if="${i} == ${currentPage}">
+                <a th:href="@{/(
+                                keyword=${keyword},
+                                page=${i}
+                             )}"
+                   th:text="${i + 1}"
+                   style="text-decoration: none; padding: 3px 5px; border: 1px solid #ccc; background: lightgray;">
+                </a>
+            </th:block>
+
+            <th:block th:unless="${i} == ${currentPage}">
+                <a th:href="@{/(
+                                keyword=${keyword},
+                                page=${i}
+                             )}"
+                   th:text="${i + 1}"
+                   style="text-decoration: none; padding: 3px 5px; border: 1px solid #ccc; background: white;">
+                </a>
+            </th:block>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
