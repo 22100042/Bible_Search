@@ -1,6 +1,6 @@
 package com.example.biblesearch.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 @Entity
