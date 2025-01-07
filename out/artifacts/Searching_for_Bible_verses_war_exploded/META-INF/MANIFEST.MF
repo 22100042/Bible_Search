@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: USER
+Build-Jdk: Oracle OpenJDK 1.8.0_241
+Implementation-Title: spring-bible-search
+Implementation-Version: 1.0.0
+Implementation-Vendor-Id: com.example.biblesearch
+Main-Class: ${start-class}
+
